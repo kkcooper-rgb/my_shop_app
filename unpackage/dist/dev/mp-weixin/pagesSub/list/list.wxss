@@ -1,0 +1,67 @@
+
+view,
+label,
+swiper-item,
+scroll-view {
+  display:flex;
+  flex-direction:column;
+  flex-shrink: 0;
+  flex-grow: 0;
+  flex-basis: auto;
+  align-items: stretch;
+  align-content: flex-start;
+}
+view,
+image,
+input,
+scroll-view,
+swiper,
+swiper-item,
+text,
+textarea,
+video {
+  position: relative;
+  border: 0px solid #000000;
+  box-sizing: border-box;
+}
+swiper-item {
+  position: absolute;
+}
+button {
+  margin: 0;
+}
+
+.goods-item {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 5px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.goods-item .goods-item-left {
+  margin-right: 5px;
+  width: 100px;
+}
+.goods-item .goods-item-left .goods-pic {
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+.goods-item-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 530rpx;
+}
+.goods-item-right .goods-name {
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+.goods-item-right .goods-name text {
+  font-size: 24rpx;
+  line-height: 30rpx;
+}
+.goods-item-right .goods-price {
+  font-size: 16px;
+  color: #c00000;
+}
+

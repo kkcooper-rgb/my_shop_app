@@ -1,0 +1,187 @@
+<template>
+	<view>
+		<swiper circular :indicator-dots="true" :autoplay="true" :interval="3000" :duration="500">
+			<swiper-item v-for="(item,i) in swiperList" :item-id="i" :key="i" @click="handleSwiperClick(item)">
+				<view class="swiper-item">
+					<image :src="item.image_src">
+				</view>
+			</swiper-item>
+		</swiper>
+		<!-- 分类导航区域 -->
+		<view class="nav-list">
+			<view class="nav-item" v-for="(item, i) in navList" :key="i" @click="navClickHandler(item)">
+				<image :src="item.image_src" class="nav-img"></image>
+			</view>
+		</view>
+		<!-- 楼层区域 -->
+		<view class="floor-list">
+			<!-- 楼层 item 项 -->
+			<view class="floor-item" v-for="(item, i) in floorList" :key="i">
+				<!-- 楼层标题 -->
+				<view class="floor-title">
+					<image :src="item.floor_title.image_src"></image>
+				</view>
+				<!-- 楼层图片区域 -->
+				<view class="floor-img-box">
+					<!-- 左侧大图片的盒子 -->
+					<view class="left-img-box" @click="handleToGoodsList(item.product_list[0])">
+						<image :src="item.product_list[0].image_src" mode="widthFix"></image>
+					</view>
+					<!-- 右侧 4 个小图片的盒子 -->
+					<view class="right-img-box">
+						<view class="right-img-item" v-for="(item2, i2) in item.product_list" :key="i2" v-if="i2 !== 0"
+							@click="handleToGoodsList(item2)">
+							<image :src="item2.image_src" mode="widthFix">
+							</image>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	import api from '@/config/api.js';
+	import badgeMix from '@/mixins/tabbar-badge.js'
+	import {
+		request
+	} from '@/utils/util.js'
+	export default {
+		mixins: [badgeMix],
+		data() {
+			return {
+				swiperList: [],
+				navList: [],
+				floorList: []
+			};
+		},
+		onLoad() {
+			this.getBanner()
+			this.getCatitems()
+			this.getFloordata()
+		},
+		methods: {
+			getBanner() {
+				request(api.getBanner).then(res => {
+					this.swiperList = res.data.message;
+				})
+			},
+			getCatitems() {
+				request(api.getCatitems).then(res => {
+					this.navList = res.data.message;
+				})
+			},
+			getFloordata() {
+				request(api.getFloordata).then(res => {
+					// console.log(res);
+					this.floorList = res.data.message;
+				})
+			},
+			handleSwiperClick(v) {
+				uni.setStorageSync('goods_id',v.goods_id)
+				uni.navigateTo({
+					url: '/pagesSub/goods_detail/goods_detail?goods_id=' + v.goods_id
+				})
+			},
+			navClickHandler(item) {
+				// 判断点击的是哪个 nav
+				if (item.name === '分类') {
+					uni.switchTab({
+						url: '/pages/cate/cate'
+					})
+				}
+			},
+			handleToGoodsList(v) {
+				console.log("v: ", v);
+				let query = v.navigator_url.split("?")[1];
+				uni.navigateTo({
+					url: '/pagesSub/list/list?' + query
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="less" scoped>
+	swiper {
+		height: 330rpx;
+
+		.swiper-item,
+		image {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.nav-list {
+		display: flex;
+		justify-content: space-around;
+		flex-direction: row;
+		margin: 15px 0;
+
+		.nav-img {
+			width: 128rpx;
+			height: 140rpx;
+		}
+	}
+
+	.floor-list {
+		width: 750rpx;
+
+		.floor-item {
+			width: 750rpx;
+
+			.floor-title {
+				display: flex;
+				flex-direction: row;
+				height: 60rpx;
+				width: 100%;
+				margin-top: 15rpx;
+
+				image {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+	}
+
+	.floor-img-box {
+		display: flex;
+		flex-direction: row;
+		width: 750rpx;
+		overflow: hidden;
+		padding-left: 10rpx;
+
+		.left-img-box {
+			width: 232rpx;
+
+			image {
+				width: 100%;
+				height: 100%;
+			}
+		}
+
+		.right-img-box {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			padding-left: 10rpx;
+			width: 500rpx;
+
+			.right-img-item {
+				width: 233rpx;
+				height: 190rpx;
+				margin-bottom: 10rpx;
+				margin-right: 10rpx;
+
+				image {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+		}
+	}
+</style>

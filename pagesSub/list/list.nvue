@@ -1,0 +1,114 @@
+<template>
+  <view>
+    <view class="goods-list">
+      <view v-for="(goods, i) in goodsList" :key="i" @click="handleListToDetail(goods)">
+        <view class="goods-item">
+          <!-- 商品左侧图片区域 -->
+          <view class="goods-item-left">
+            <image :src="goods.goods_small_logo || defaultPic" class="goods-pic"></image>
+          </view>
+          <!-- 商品右侧信息区域 -->
+          <view class="goods-item-right">
+            <!-- 商品标题 -->
+            <view >
+				<text class="goods-name">{{goods.goods_name}}</text>
+			</view>
+            <view class="goods-info-box">
+              <!-- 商品价格 -->
+              <view ><text class="goods-price">￥{{goods.goods_price}}</text></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+	import api from '@/config/api.js';
+	import {
+		request
+	} from '@/utils/util.js'
+	export default {
+		data() {
+			return {
+				pagenum:0,
+				goodsList: [],
+				// 默认的空图片
+				defaultPic: 'https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png'
+			}
+		},
+		onLoad(options) {
+			this.getGoodsList(options)
+		},
+		onPullDownRefresh(){
+			console.log('refresh');
+			setTimeout(()=>{
+				uni.stopPullDownRefresh();
+			},2000)
+		},
+		onReachBottom(){
+			console.log("onReachBottom");
+		},
+		methods: {
+			getGoodsList(options){
+				let params = {
+					query:options.query,
+					pagenum:this.pagenum,
+					pagesize:20
+				}
+				request(api.getGoodsList,params).then(res=>{
+					// console.log(res);
+					this.goodsList = res.data.message.goods
+				})
+			},
+			handleListToDetail(v){
+				console.log(v,"触发了");
+				uni.setStorageSync('goods_id',v.goods_id)
+				uni.navigateTo({
+					url: '/pagesSub/goods_detail/goods_detail?goods_id=' + v.goods_id
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="less">
+.goods-item {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 5px;
+  border-bottom: 1px solid #f0f0f0;
+
+  .goods-item-left {
+    margin-right: 5px;
+	width: 100px;
+    .goods-pic {
+      width: 100px;
+      height: 100px;
+      display: block;
+    }
+  }
+
+  
+}
+.goods-item-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+	width: 530rpx;
+    .goods-name {
+      font-size: 28rpx;
+	  line-height: 40rpx;
+	  text{
+		  font-size: 24rpx;
+		  line-height: 30rpx;
+	  }
+    }
+
+    .goods-price {
+      font-size: 16px;
+      color: #c00000;
+    }
+  }
+</style>
