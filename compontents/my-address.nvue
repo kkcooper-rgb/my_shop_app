@@ -9,10 +9,10 @@
 		<view class="address-info-box" v-else @click="chooseAddress">
 			<view class="row1">
 				<view class="row1-left">
-					<view class="username">收货人：<text>{{address.userName}}</text></view>
+					<view ><text class="username">收货人：{{address.userName}}</text></view>
 				</view>
 				<view class="row1-right">
-					<view class="phone">电话：<text>{{address.telNumber}}</text></view>
+					<view ><text class="phone">电话：{{address.telNumber}}</text></view>
 					<uni-icons type="arrowright" size="16"></uni-icons>
 				</view>
 			</view>
@@ -36,7 +36,7 @@
 	export default {
 		data() {
 			return {
-				address: {},
+				// address: {},
 			}
 		},
 		computed: {
@@ -50,6 +50,7 @@
 				// 1. 调用小程序提供的 chooseAddress() 方法，即可使用选择收货地址的功能
 				//    返回值是一个数组：第1项为错误对象；第2项为成功之后的收货地址对象
 				const [err, succ] = await uni.chooseAddress().catch(err => err)
+				console.log(err, succ);
 				// 2. 用户成功的选择了收货地址
 				if (succ && succ.errMsg === 'chooseAddress:ok') {
 					// 更新 vuex 中的收货地址
@@ -66,7 +67,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	// 底部边框线的样式
 	.address-border {
 		display: block;
@@ -78,6 +79,7 @@
 	.address-choose-box {
 		height: 90px;
 		display: flex;
+		flex-direction: row;
 		align-items: center;
 		justify-content: center;
 	}
@@ -94,10 +96,12 @@
 		// 第一行
 		.row1 {
 			display: flex;
+			flex-direction: row;
 			justify-content: space-between;
 
 			.row1-right {
 				display: flex;
+				flex-direction: row;
 				align-items: center;
 
 				.phone {
@@ -109,6 +113,7 @@
 		// 第二行
 		.row2 {
 			display: flex;
+			flex-direction: row;
 			align-items: center;
 			margin-top: 10px;
 

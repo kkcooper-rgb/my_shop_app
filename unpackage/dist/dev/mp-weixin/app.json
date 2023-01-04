@@ -49,5 +49,12 @@
       }
     ]
   },
+  "permission": {},
+  "requiredPrivateInfos": [
+    "chooseAddress"
+  ],
+  "unipush": {
+    "enable": false
+  },
   "usingComponents": {}
 }

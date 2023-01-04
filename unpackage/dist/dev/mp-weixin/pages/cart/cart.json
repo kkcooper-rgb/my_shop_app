@@ -6,6 +6,7 @@
     "uni-swipe-action": "/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action",
     "uni-swipe-action-item": "/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item",
     "my-goods": "/compontents/my-goods",
-    "my-address": "/compontents/my-address"
+    "my-address": "/compontents/my-address",
+    "my-settle": "/compontents/my-settle"
   }
 }
