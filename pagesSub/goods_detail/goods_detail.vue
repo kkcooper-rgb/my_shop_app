@@ -117,10 +117,17 @@
 				})
 			},
 			onClick(e) {
-				uni.showToast({
-					title: `点击${e.content.text}`,
-					icon: 'none'
-				})
+				if(e.content.text==='购物车'){
+					uni.switchTab({
+						url:'/pages/cart/cart'
+					})
+				}else{
+					uni.showToast({
+						title: `点击${e.content.text}`,
+						icon: 'none'
+					})
+				}
+				
 			},
 			// 右侧按钮的点击事件处理函数
 			buttonClick(e) {
