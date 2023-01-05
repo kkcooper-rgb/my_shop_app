@@ -177,11 +177,24 @@ var _default = {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                uni.chooseLocation({
+                  type: 'gcj02',
+                  geocode: true,
+                  success: function success(res) {
+                    console.log(res);
+                    console.log('位置名称：' + res.name);
+                    console.log('详细地址：' + res.address);
+                    console.log('纬度：' + res.latitude);
+                    console.log('经度：' + res.longitude);
+                  }
+                });
+                // 1. 调用小程序提供的 chooseAddress() 方法，即可使用选择收货地址的功能
+                //    返回值是一个数组：第1项为错误对象；第2项为成功之后的收货地址对象
+                _context.next = 3;
                 return uni.chooseAddress().catch(function (err) {
                   return err;
                 });
-              case 2:
+              case 3:
                 _yield$uni$chooseAddr = _context.sent;
                 _yield$uni$chooseAddr2 = (0, _slicedToArray2.default)(_yield$uni$chooseAddr, 2);
                 err = _yield$uni$chooseAddr2[0];
@@ -197,7 +210,7 @@ var _default = {
                 if (err && err.errMsg === 'chooseAddress:fail auth deny') {
                   _this.reAuth(); // 调用 this.reAuth() 方法，向用户重新发起授权申请
                 }
-              case 9:
+              case 10:
               case "end":
                 return _context.stop();
             }

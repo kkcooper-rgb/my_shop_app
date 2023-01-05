@@ -9,10 +9,10 @@
 		<view class="address-info-box" v-else @click="chooseAddress">
 			<view class="row1">
 				<view class="row1-left">
-					<view ><text class="username">收货人：{{address.userName}}</text></view>
+					<view><text class="username">收货人：{{address.userName}}</text></view>
 				</view>
 				<view class="row1-right">
-					<view ><text class="phone">电话：{{address.telNumber}}</text></view>
+					<view><text class="phone">电话：{{address.telNumber}}</text></view>
 					<uni-icons type="arrowright" size="16"></uni-icons>
 				</view>
 			</view>
@@ -47,6 +47,17 @@
 			...mapMutations('m_user', ['updateAddress']),
 			// 选择收货地址
 			async chooseAddress() {
+				uni.chooseLocation({
+					type: 'gcj02',
+					geocode: true,
+					success: function(res) {
+						console.log(res);
+						console.log('位置名称：' + res.name);
+						console.log('详细地址：' + res.address);
+						console.log('纬度：' + res.latitude);
+						console.log('经度：' + res.longitude);
+					}
+				});
 				// 1. 调用小程序提供的 chooseAddress() 方法，即可使用选择收货地址的功能
 				//    返回值是一个数组：第1项为错误对象；第2项为成功之后的收货地址对象
 				const [err, succ] = await uni.chooseAddress().catch(err => err)
