@@ -82,8 +82,8 @@
 	// 底部边框线的样式
 	.address-border {
 		display: block;
-		width: 100%;
-		height: 5px;
+		width: 750rpx;
+		height: 10rpx;
 	}
 
 	// 选择收货地址的盒子

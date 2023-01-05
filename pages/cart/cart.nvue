@@ -7,7 +7,7 @@
 			<!-- 左侧的图标 -->
 			<uni-icons type="shop" size="18"></uni-icons>
 			<!-- 描述文本 -->
-			<text class="cart-title-text">购物车</text>
+			<view class="cart-title-text"><text class="title-text">购物车</text></view>
 		</view>
 		<!-- 商品列表区域 -->
 		<uni-swipe-action>
@@ -90,7 +90,7 @@
 	}
 
 	.cart-title {
-		height: 40px;
+		height: 80rpx;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
@@ -99,7 +99,10 @@
 		border-bottom: 1px solid #efefef;
 
 		.cart-title-text {
-			margin-left: 10px;
+			margin-left: 20rpx;
+			.title-text{
+				font-size: 28rpx;
+			}
 		}
 	}
 

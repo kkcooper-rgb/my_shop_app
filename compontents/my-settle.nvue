@@ -3,17 +3,17 @@
 	<view class="my-settle-container">
 		<!-- 全选区域 -->
 		<label class="radio" @click="changeAllState">
-			<radio color="#C00000" :checked="isFullCheck" /><text>全选</text>
+			<radio color="#C00000" :checked="isFullCheck" /><text class="radio-text">全选</text>
 		</label>
 
 		<!-- 合计区域 -->
 		<view class="amount-box">
-			<text>合计:</text>
-			<text class="amount">￥{{checkedGoodsAmount}}</text>
+			<text class="amount-box-text">合计:</text>
+			<text class="amount amount-box-text">￥{{checkedGoodsAmount}}</text>
 		</view>
 
 		<!-- 结算按钮 -->
-		<view class="btn-settle" @click="settlement"><text class="btn-settle">结算({{checkedCount}})</text></view>
+		<view class="btn-settle" @click="settlement"><text class="btn-settle-text">结算({{checkedCount}})</text></view>
 	</view>
 </template>
 
@@ -225,20 +225,29 @@
 			display: flex;
 			flex-direction: row;
 			align-items: center;
+			.radio-text{
+				font-size: 28rpx;
+			}
 		}
 
 		.amount {
 			color: #c00000;
+		}
+		.amount-box-text{
+			font-size: 28rpx;
 		}
 
 		.btn-settle {
 			height: 100rpx;
 			min-width: 200rpx;
 			background-color: #c00000;
-			color: white;
-			line-height: 100rpx;
-			text-align: center;
 			padding: 0 20rpx;
+			.btn-settle-text{
+				font-size: 28rpx;
+				color: white;
+				line-height: 100rpx;
+				text-align: center;
+			}
 		}
 	}
 </style>

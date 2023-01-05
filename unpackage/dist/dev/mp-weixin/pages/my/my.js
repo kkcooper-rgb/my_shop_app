@@ -154,7 +154,7 @@ var MyLogin = function MyLogin() {
     return resolve(__webpack_require__(/*! @/compontents/my-login.nvue */ 146));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
-var MyUserInfo = function MyUserInfo() {
+var MyUserinfo = function MyUserinfo() {
   Promise.all(/*! require.ensure | compontents/my-userinfo */[__webpack_require__.e("common/vendor"), __webpack_require__.e("compontents/my-userinfo")]).then((function () {
     return resolve(__webpack_require__(/*! @/compontents/my-userinfo.nvue */ 153));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
@@ -166,7 +166,7 @@ var _default = {
   },
   components: {
     'my-login': MyLogin,
-    'my-userinfo': MyUserInfo
+    'my-userinfo': MyUserinfo
   },
   computed: _objectSpread({}, (0, _vuex.mapState)('m_user', ['token']))
 };

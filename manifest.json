@@ -75,13 +75,7 @@
                         "appkey_android" : "fcd652cc3408281249997deba2058b8e"
                     }
                 },
-                "payment" : {
-                    "weixin" : {
-                        "__platform__" : [ "ios", "android" ],
-                        "appid" : "",
-                        "UniversalLinks" : ""
-                    }
-                }
+                "payment" : {}
             },
             "splashscreen" : {
                 "androidStyle" : "default",

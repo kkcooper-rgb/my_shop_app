@@ -57,8 +57,4 @@ button {
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-page.data-v-704a7f18,
-.my-container.data-v-704a7f18 {
-  height: 100%;
-}
 

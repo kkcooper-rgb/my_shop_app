@@ -47,16 +47,25 @@
   flex-direction: row;
   align-items: center;
 }
+.my-settle-container .radio .radio-text {
+  font-size: 28rpx;
+}
 .my-settle-container .amount {
   color: #c00000;
+}
+.my-settle-container .amount-box-text {
+  font-size: 28rpx;
 }
 .my-settle-container .btn-settle {
   height: 100rpx;
   min-width: 200rpx;
   background-color: #c00000;
+  padding: 0 20rpx;
+}
+.my-settle-container .btn-settle .btn-settle-text {
+  font-size: 28rpx;
   color: white;
   line-height: 100rpx;
   text-align: center;
-  padding: 0 20rpx;
 }
 
