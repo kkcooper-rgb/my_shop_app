@@ -7,6 +7,7 @@
 			<image :src="goods.goods_small_logo || defaultPic" class="goods-pic"></image>
 		</view>
 		<view class="goods-item-right">
+			<view ><text class="goods-name">{{goods.goods_name}}</text></view>
 			<view class="goods-info-box">
 				<!-- 商品价格 -->
 				<view><text class="goods-price">￥{{goods.goods_price | tofixed}}</text></view>

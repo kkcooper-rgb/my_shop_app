@@ -21,8 +21,9 @@
         /* 模块配置 */
         "modules" : {
             "Camera" : {},
+            "Geolocation" : {},
             "Maps" : {},
-            "Geolocation" : {}
+            "Payment" : {}
         },
         /* 应用发布信息 */
         "distribute" : {
@@ -72,6 +73,13 @@
                         "__platform__" : [ "ios", "android" ],
                         "appkey_ios" : "f0e165322162e42b8dd01f87431cc597",
                         "appkey_android" : "fcd652cc3408281249997deba2058b8e"
+                    }
+                },
+                "payment" : {
+                    "weixin" : {
+                        "__platform__" : [ "ios", "android" ],
+                        "appid" : "",
+                        "UniversalLinks" : ""
                     }
                 }
             },

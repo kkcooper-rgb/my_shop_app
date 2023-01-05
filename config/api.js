@@ -12,4 +12,14 @@ module.exports = {
 	getCategories: baseUrl + '/categories',
 	// 商品列表搜索
 	getGoodsList: baseUrl + '/goods/search',
+	// 获取用户token
+	getUserToken:baseUrl + '/users/wxlogin',
+	// 创建订单
+	createOrders:baseUrl + '/my/orders/create',
+	// 查看订单支付状态
+	getChkOrder:baseUrl + '/my/orders/chkOrder',
+	// 历史订单查询
+	getOrderAll:baseUrl + '/my/orders/all',
+	// 获取支付参数
+	getReqUnifiedorder:baseUrl + '/my/orders/req_unifiedorder',
 }

@@ -103,13 +103,13 @@ var components
 try {
   components = {
     uniIcons: function () {
-      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 95))
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 97))
     },
     uniSwipeAction: function () {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action */ "uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue */ 103))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action */ "uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue */ 105))
     },
     uniSwipeActionItem: function () {
-      return Promise.all(/*! import() | uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue */ 108))
+      return Promise.all(/*! import() | uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue */ 110))
     },
   }
 } catch (e) {
@@ -180,17 +180,17 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 var MyGoods = function MyGoods() {
   __webpack_require__.e(/*! require.ensure | compontents/my-goods */ "compontents/my-goods").then((function () {
-    return resolve(__webpack_require__(/*! @/compontents/my-goods.nvue */ 120));
+    return resolve(__webpack_require__(/*! @/compontents/my-goods.nvue */ 122));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var MyAddress = function MyAddress() {
   Promise.all(/*! require.ensure | compontents/my-address */[__webpack_require__.e("common/vendor"), __webpack_require__.e("compontents/my-address")]).then((function () {
-    return resolve(__webpack_require__(/*! @/compontents/my-address.nvue */ 127));
+    return resolve(__webpack_require__(/*! @/compontents/my-address.nvue */ 129));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var MySettle = function MySettle() {
-  __webpack_require__.e(/*! require.ensure | compontents/my-settle */ "compontents/my-settle").then((function () {
-    return resolve(__webpack_require__(/*! @/compontents/my-settle.nvue */ 172));
+  Promise.all(/*! require.ensure | compontents/my-settle */[__webpack_require__.e("common/vendor"), __webpack_require__.e("compontents/my-settle")]).then((function () {
+    return resolve(__webpack_require__(/*! @/compontents/my-settle.nvue */ 139));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

@@ -1,27 +1,27 @@
 <template>
-  <view>
-    <view class="goods-list">
-      <view v-for="(goods, i) in goodsList" :key="i" @click="handleListToDetail(goods)">
-        <view class="goods-item">
-          <!-- 商品左侧图片区域 -->
-          <view class="goods-item-left">
-            <image :src="goods.goods_small_logo || defaultPic" class="goods-pic"></image>
-          </view>
-          <!-- 商品右侧信息区域 -->
-          <view class="goods-item-right">
-            <!-- 商品标题 -->
-            <view >
-				<text class="goods-name">{{goods.goods_name}}</text>
+	<view>
+		<view class="goods-list">
+			<view v-for="(goods, i) in goodsList" :key="i" @click="handleListToDetail(goods)">
+				<view class="goods-item">
+					<!-- 商品左侧图片区域 -->
+					<view class="goods-item-left">
+						<image :src="goods.goods_small_logo || defaultPic" class="goods-pic"></image>
+					</view>
+					<!-- 商品右侧信息区域 -->
+					<view class="goods-item-right">
+						<!-- 商品标题 -->
+						<view>
+							<text class="goods-name">{{goods.goods_name}}</text>
+						</view>
+						<view class="goods-info-box">
+							<!-- 商品价格 -->
+							<view><text class="goods-price">￥{{goods.goods_price}}</text></view>
+						</view>
+					</view>
+				</view>
 			</view>
-            <view class="goods-info-box">
-              <!-- 商品价格 -->
-              <view ><text class="goods-price">￥{{goods.goods_price}}</text></view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
+		</view>
+	</view>
 </template>
 
 <script>
@@ -32,39 +32,64 @@
 	export default {
 		data() {
 			return {
-				pagenum:0,
+				// 请求参数对象
+				queryObj: {
+					// 查询关键词
+					query: '',
+					// 商品分类id
+					cid: '',
+					// 页码值
+					pagenum: 1,
+					// 每页显示多少条数据
+					pagesize: 10
+				},
+				// 总数量，用来实现分页
+				total: 0,
+				// 节流阀 === 是否正在请求数据
+				isloading: false,
 				goodsList: [],
 				// 默认的空图片
 				defaultPic: 'https://img3.doubanio.com/f/movie/8dd0c794499fe925ae2ae89ee30cd225750457b4/pics/movie/celebrity-default-medium.png'
 			}
 		},
 		onLoad(options) {
-			this.getGoodsList(options)
+			this.queryObj.query = options.query || '';
+			this.queryObj.cid = options.cid || '';
+			this.getGoodsList()
 		},
-		onPullDownRefresh(){
-			console.log('refresh');
-			setTimeout(()=>{
-				uni.stopPullDownRefresh();
-			},2000)
+		onPullDownRefresh() {
+			this.queryObj.pagenum = 1; // 页码重置为1
+			this.total = 0; // 总数量条数重置为0
+			this.isloading = false; // 关闭节流阀
+			this.goodsList = []; // 重置商品数据
+			this.getGoodsList()
 		},
-		onReachBottom(){
-			console.log("onReachBottom");
+		onReachBottom() {
+			// 判断是否还有下一页数据
+			if (this.queryObj.pagenum * this.queryObj.pagesize >= this.total) return uni.showToast({
+				title: `数据加载完毕！`,
+				icon: 'error'
+			})
+			// 判断节流阀 为true时，不请求数据
+			if (this.isloading) return;
+			// 让页码值自增+1
+			this.queryObj.pagenum += 1;
+			this.getGoodsList();
 		},
 		methods: {
-			getGoodsList(options){
-				let params = {
-					query:options.query,
-					pagenum:this.pagenum,
-					pagesize:20
-				}
-				request(api.getGoodsList,params).then(res=>{
+			getGoodsList() {
+				this.isloading = true;
+				request(api.getGoodsList, this.queryObj).then(res => {
+					uni.stopPullDownRefresh();
 					// console.log(res);
-					this.goodsList = res.data.message.goods
+					this.isloading = false;
+					this.goodsList = [...this.goodsList, ...res.data.message.goods];
+					this.total = res.data.message.total; // 总数居条数
 				})
 			},
-			handleListToDetail(v){
-				console.log(v,"触发了");
-				uni.setStorageSync('goods_id',v.goods_id)
+			handleListToDetail(v) {
+				console.log(v, "触发了");
+				uni.setStorageSync('goods_id', v.goods_id)
 				uni.navigateTo({
 					url: '/pagesSub/goods_detail/goods_detail?goods_id=' + v.goods_id
 				})
@@ -74,41 +99,45 @@
 </script>
 
 <style lang="less">
-.goods-item {
-  display: flex;
-  flex-direction: row;
-  padding: 10px 5px;
-  border-bottom: 1px solid #f0f0f0;
+	.goods-item {
+		display: flex;
+		flex-direction: row;
+		padding: 10px 5px;
+		border-bottom: 1px solid #f0f0f0;
 
-  .goods-item-left {
-    margin-right: 5px;
-	width: 100px;
-    .goods-pic {
-      width: 100px;
-      height: 100px;
-      display: block;
-    }
-  }
+		.goods-item-left {
+			margin-right: 5px;
+			width: 100px;
 
-  
-}
-.goods-item-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-	width: 530rpx;
-    .goods-name {
-      font-size: 28rpx;
-	  line-height: 40rpx;
-	  text{
-		  font-size: 24rpx;
-		  line-height: 30rpx;
-	  }
-    }
+			.goods-pic {
+				width: 100px;
+				height: 100px;
+				display: block;
+			}
+		}
 
-    .goods-price {
-      font-size: 16px;
-      color: #c00000;
-    }
-  }
+
+	}
+
+	.goods-item-right {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 530rpx;
+
+		.goods-name {
+			font-size: 28rpx;
+			line-height: 40rpx;
+
+			text {
+				font-size: 24rpx;
+				line-height: 30rpx;
+			}
+		}
+
+		.goods-price {
+			font-size: 16px;
+			color: #c00000;
+		}
+	}
 </style>

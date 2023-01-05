@@ -1,6 +1,6 @@
 export function request(url, data, method= "GET", header = {
   'Content-Type': 'application/json',
-  'X-Auth-Token': uni.getStorageSync('cookie')
+  'Authorization': uni.getStorageSync('token')
 }) {
   return new Promise(function (resolve, reject) {
     uni.request({
